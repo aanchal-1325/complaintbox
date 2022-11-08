@@ -1,0 +1,68 @@
+{%extends 'userPanel/dash.html'%}
+   
+   
+
+      {%block mainblock%} 
+    <div class="col s12 m12 l9">
+      <!-- Modal Trigger -->
+<main>
+  <section>
+    <div class="section">
+      <fieldset>
+        <legend><h5>Dashboard:</h5></legend>
+        <br>
+  
+   
+   <ul class="collection">
+   {% for complaint in complaints %}
+    <li class="collection-item avatar">
+      <i class="material-icons circle">folder</i>
+      <span class="title">CATEGEORY : {{complaint.category}}</span>
+      <p>SUBJECT : {{complaint.subject}}<br><br>
+         Discreption : {{complaint.Description}}
+      </p>
+  <a class="modal-trigger btn-floating btn-large cyan pulse secondary-content" href="#modal1{{complaint.id}}"><i class="material-icons right pulse">edit</i></a>
+     <br>
+    </li>
+
+     <div class="divider"></div>
+
+
+     <!-- Modal Structure -->
+  <div id="modal1{{complaint.id}}" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <div class="row">
+    <form action="/utils/request.php" method="POST" class="col s12">
+          <input value=" {{complaint.category}}" id="category" name="category" type="hidden" class="validate">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">details</i>
+          <input value="{{complaint.subject}}" id="subject" name="subject" type="text" class="validate">
+          <label for="subject">SUBJECT</label>
+        </div>
+         
+        <div class="input-field col s12">
+          <i class="material-icons prefix">mode_edit</i>
+          <textarea id="icon_prefix2" name="cDescription"  class="materialize-textarea">{{complaint.Description|e}}</textarea>
+          <label for="icon_prefix2">Description</label>
+        </div>
+   
+  </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn waves-effect waves-light" type="submit" name="standardComplaints">Submit
+    <i class="material-icons right">send</i>
+  </button>
+   </form>
+    </div>
+  </div>
+   {% endfor %}
+  </ul>   
+  </fieldset>
+
+    </div>
+  </section>
+<main>
+</div>
+
+
+          {%endblock%}

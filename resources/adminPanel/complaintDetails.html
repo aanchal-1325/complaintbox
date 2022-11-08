@@ -1,0 +1,60 @@
+{%extends 'adminPanel/dash.html'%}
+   
+      {%block mainblock%} 
+    
+<div class="col s12 m12 l9">
+<main>
+  <section>    
+    <div class="divider"></div>
+    <div class="section">
+      <fieldset>
+        <legend><h5>User Message:</h5></legend>
+        {% for complaint in complaints %}
+          <p>Date & Time : &nbsp <span>{{complaint.cDate}} || {{complaint.cTime}}</span></p>
+          <p>Subject: &nbsp <span>{{complaint.subject}}</span></p>
+          <span>Complaint:</span>
+          <span>{{description|raw}}</span>
+            {% endfor %}
+      </fieldset>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="section">  
+      <fieldset>
+        <legend><h5>Admin Reply:</h5></legend>
+        <br>
+        <form action="/utils/request.php" method="POST">
+          {% for complaint in complaints %}
+          <input type="hidden" name="CID" value="{{complaint.CID}}">
+            {% endfor %}
+        <div class="input-field col s12">
+          <i class="material-icons prefix">toc</i>
+            <select name="UID" required>
+              <option value="" disabled selected>Choose your option</option>
+              {% for userName in categories %}
+              <option value="{{userName.UID}}">{{userName.Name}}</option>
+                {% endfor %}
+            </select>
+            <label>Concerned Department/Team Member</label>
+        </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">create</i>
+                <textarea id="textarea1" name="comment" class="materialize-textarea" required></textarea>
+                <label for="textarea1">Admin Message</label>
+              </div>   
+          
+       <button  style="border-radius: 8px;" class="btn waves-effect waves-green" type="submit" name="assignWork">Assign Work 
+      <i  class="material-icons right">send</i>
+    </button>
+</form>
+      </fieldset>
+    </div>
+  </section>
+<main>
+</div>
+    {%endblock%}
+    
+      

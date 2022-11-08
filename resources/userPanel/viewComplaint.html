@@ -3,43 +3,56 @@
    
 
       {%block mainblock%} 
-<fieldset>
-    <legend> <h1>All Complaints submit by you</h1></legend>
-
-<table class="responsive-table">
+    <div class="col s12 m12 l9">
+<main>
+  <section>
+    <div class="section">
+      <fieldset>
+        <legend><h5>Dashboard:</h5></legend>
+        <br>
+        <p style="color: red">NOTE: DELETE AND UPDATE REQUEST AVAIL ONY FOR THE COMPLAINT WHICH IS NOT SEEN BY ADMIN.</p>
+  <table class="responsive-table">
         <thead>
           <tr>
             <th>complaint id</th>
               <th>Date</th>
               <th>Status</th>
-              <th>update</th>
-              <th>delete</th>
+              <th></th>
+              <th></th>
+              <th></th>
           </tr>
         </thead>
 
         <tbody>
+          {% for complaint in complaints %}
           <tr>
-              <td>$0.87</td>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-             <td>$0.87</td>
+            <td>{{complaint.CID}}</td>
+            <td>{{complaint.cDate}}</td>
+            <td>{{complaint.status|e}}</td>
+            <td class=" tooltipped" data-position="left" data-tooltip="View"><a href="/userPanel/complaintDetails/?id={{complaint.CID|e}}" class="btn-floating green darken-3 pulse"><i class="material-icons">remove_red_eye</i></a></td>
+ {% if complaint.status == 'ACTIVE' or complaint.status =='PENDING'or complaint.status =='UNSEEN' %}
+             <td class=" tooltipped" data-position="left" data-tooltip="Update"><a  class="btn-floating  red lighten-1 pulse" onclick="return getUpdateConfirmation();" href="/userPanel/updateComplaint/?id={{complaint.CID|e}}"> <i class=" material-icons">edit</i></a></td>
+   {% endif %}
+  {% if complaint.status == 'UNSEEN' %}
+               <td class=" tooltipped" data-position="left" data-tooltip="Delete"><a class="btn-floating  red accent-4 pulse" onclick="return getConfirmation();" href="/userPanel/deleteComplaint/?id={{complaint.CID|e}}" > <i class="material-icons">delete_forever</i></a></td>
+  {% endif %}
           </tr>
-          <tr>
-              <td>$0.87</td>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-             <td>$0.87</td>
-          </tr>
-          <tr>
-              <td>$0.87</td>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-             <td>$0.87</td>
-          </tr>
+            {% endfor %}
         </tbody>
       </table>
-</fieldset>
-       {%endblock%}
+   
+     
+  </fieldset>
+    </div>
+  </section>
+<main>
+</div>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems);
+  });
+</script>
+
+          {%endblock%}
+

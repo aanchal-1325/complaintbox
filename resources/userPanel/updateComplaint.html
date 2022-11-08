@@ -1,0 +1,67 @@
+{%extends 'userPanel/dash.html'%}
+   
+   
+
+      {%block mainblock%} 
+    
+      <div class="row">
+    <form action="/utils/request.php"  method="POST">
+      
+    	<fieldset>
+    <legend> <h1>Update Complaint</h1></legend>
+    <input type="hidden" name="CID" value="{{id}}">
+      <div class="row"> 
+        <div class="input-field col s12">
+           <i class="material-icons prefix">class</i>
+          <input id="subject" name="subject" value="{{subject}}" required  type="text" class="validate">
+          <label for="subject">Subject</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">date_range</i>
+        	<input id="dateA"required value="{{cDate}}" name="cdate" type="text" class="datepicker">
+         
+          <label for="dateA">Date</label>
+        </div>
+        <div class="input-field col s6">
+          <i class="material-icons prefix">watch</i>
+            <input required id="timeB" value="{{cTime}}" name="ctime" type="text"  class="timepicker">
+          <label for="timeB">Time</label>
+        </div>
+      </div>
+      
+
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">mode_edit</i>
+          <textarea value="{{description|raw}}" name="cDescription" required id="textarea1"class="materialize-textarea">{{description|raw}}</textarea>
+          <label for="textarea1">Write your Complaint</label>
+        </div>
+     
+  </div>
+  <button class="btn waves-effect waves-light" type="submit" name="UpdateComplaint">Submit
+    <i class="material-icons right">send</i>
+  </button>
+      
+  </fieldset>
+    </form>
+  </div>
+  <script type="text/javascript">
+
+   document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems, {autoClose:true});
+  });
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.timepicker');
+    var instances = M.Timepicker.init(elems, {autoClose:true});
+  });
+
+      
+  </script>
+          {%endblock%}

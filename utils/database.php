@@ -1,13 +1,13 @@
 <?php
-
+//user:complaintboxuser:id19809824_complaintboxuser
+//pass:OKatuP#$t=ZT]F9D
+//dbname:complaintbox:id19809824_complaintbox
 class database {
-
 	private $conn;
-
 	function mk_conn() {
-
+		
 		$server ="localhost";
-		$user = "monish";
+		$user = "root";
 		$pass = "";
 		$dbName ="complaintbox";
 
@@ -20,7 +20,6 @@ class database {
 	}
 
 	function query($sql) {
-
 		$result = $this->conn->query($sql);
 		if ($result) {
 			return $result;
@@ -28,7 +27,9 @@ class database {
 			error_log($sql . "\t" . $this->conn->error, 0);
 		}
 	}
-
+	function getLastID(){
+		return mysqli_insert_id($this->conn);
+	}
 	function close() {
 		$this->conn->close();
 	}

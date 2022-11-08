@@ -1,0 +1,113 @@
+{%extends 'web/home.html'%}
+ {%block mainblock%}
+  <style type="text/css">
+ 
+  body{
+    background:#212121;
+  }
+  input,textarea{
+    color: #00bebe;
+  }
+</style>
+<body>
+      <div class="container">
+          <fieldset style="color: #00bebe;margin-right: 30px; margin-left: 30px;" ><legend><h2>Login with Social Media or Manually</h2></legend>
+            <div class="row">
+    <div class="col s12 m6">
+          <br><br> <br><br>
+          <a class="btn waves-effect waves-green col s12" href="{{login}}">login with google  </a>
+    <!--  <button  type="submit" name="flogin">login with google  
+
+      <i  class="material-icons left">email</i>
+      <i  class="material-icons right">email</i>
+    </button>   
+     -->
+      <br> <br><br>
+
+      <a href="{{fblogin}}" class="btn waves-effect waves-green col s12">login with  facebook </a>
+      <br><br> <br>
+      <a  class="btn waves-effect waves-green col s12" href="/register">Register</a>
+     
+  
+</div>
+    <div class="col s12 m6">
+      
+    <form action="/utils/registration.php" method="POST">
+    <div class="row">
+       <br>
+    <div class="input-field col s12">
+          <i class="material-icons prefix">email</i>
+          <input required name="gmail" id="gmail" type="email" class="validate">
+          <label for="gmail">Email ID</label>
+        </div>
+
+      <div class="input-field col s12">
+          <i class="material-icons prefix">vpn_key</i>
+          <input required name="password" id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+
+
+         <div class="tooltipped" data-position="top" data-delay="50" data-tooltip="login"  style="text-align: center;">
+           <br>
+      <br><br> <br>
+      <br><br>
+      <br><br> <br>
+    
+  <button  class="btn waves-effect waves-green " type="submit" name="login">login 
+      <i  class="material-icons right">send</i>
+    </button>
+  </div>
+   </form>
+        </span>
+        <br>
+         <div class="input-field col s12">
+           <a class="waves-effect waves-light btn modal-trigger col s12" href="#modal1">FORGET PASSWORD</a>
+           
+
+  
+      
+    </button>
+        </div>
+   
+
+  </div>
+            
+ <!-- Modal Trigger -->
+ 
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <form action="/utils/request.php" method="POST" >
+    <div class="modal-content">
+      <h4>Enter an email which you have registred with this portal</h4>
+     <div class="input-field col s12">
+          <i class="material-icons prefix">email</i>
+          <input required name="gmail" id="gmail" type="email" class="validate">
+          <label for="gmail">Email ID</label>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+       <div class="modal-footer">
+      <button class="btn waves-effect waves-light" 
+       type="submit" name="forgetPassword">Submit
+    <i class="material-icons right">send</i>
+  </button>
+</div>
+  </div>
+</form>
+
+
+  </fieldset>
+   </div>
+ </body>
+<script type="text/javascript">
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  });
+</script>
+   {%endblock%}

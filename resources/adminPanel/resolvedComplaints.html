@@ -1,0 +1,35 @@
+{%extends 'adminPanel/dash.html'%}
+      {%block mainblock%} 
+    <div class="col s12 m12 l9">
+<main>
+  <section>
+    <div class="section">
+      <fieldset>
+        <legend><h5>Solved Complaints</h5></legend>
+        <br>
+  <ul class="collection">
+    {% for complaint in complaints %}
+    <li class="collection-item avatar">
+      <i class="material-icons circle">description</i>
+     
+      <span class="title">complaint ID : {{complaint.CID}}</span>
+      <p>Date & Time :  {{complaint.cDate}} || {{complaint.cTime}}<br>
+        <p>Category :  {{complaint.cType}} </p>
+         Subject : {{complaint.subject}}
+      </p>
+      <a href="/adminPanel/complaintData/?id={{complaint.CID}}" class="btn-floating btn-large  green darken-4 pulse secondary-content"><i class="material-icons">details</i></a>
+      
+    </li>
+   {% endfor %}
+  </ul>
+   
+     
+  </fieldset>
+    </div>
+  </section>
+<main>
+</div>
+
+
+
+          {%endblock%}

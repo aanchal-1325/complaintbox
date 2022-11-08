@@ -1,0 +1,60 @@
+{%extends 'adminPanel/dash.html'%}
+      {%block mainblock%} 
+    <div class="col s12 m12 l9">
+<main>
+  <section>
+    <div class="section">
+      <fieldset>
+        <legend><h5>USERS DATA</h5></legend>
+        <br>
+   <ul class="collection">
+     {% for user in users %}
+    <li class="collection-item avatar">
+      <img src="/images/download.png" alt="" class="circle">
+      <span class="title">{{user.Name}}</span>
+      <p>{{user.Category}}<br>
+        {{user.Email}}<br>
+        +91-{{user.Mobile}}<br>
+        {{user.Address}}<br>
+      </p>
+    </li>
+
+ 
+     {% endfor %}
+   </ul>
+     
+     <div class="divider"></div>
+      <p style="color: red">Complaint submit by this user</p>
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>complaint id</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th></th>
+              <th></th>
+              <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for complaint in complaints %}
+          <tr>
+            <td>{{complaint.CID}}</td>
+            <td>{{complaint.cDate}}</td>
+            <td>{{complaint.status|e}}</td>
+            <td class=" tooltipped" data-position="left" data-tooltip="View"><a href="/adminPanel/complaintData/?id={{complaint.CID}}" class="btn-floating green darken-3 pulse"><i class="material-icons">remove_red_eye</i></a></td>
+
+ 
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+  </fieldset>
+    </div>
+  </section>
+<main>
+</div>
+
+
+          {%endblock%}

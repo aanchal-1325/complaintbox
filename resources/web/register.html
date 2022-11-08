@@ -1,0 +1,124 @@
+{%extends 'web/home.html'%}
+ {%block mainblock%}
+  <style type="text/css">
+ 
+  body{
+    background:#212121;
+  }
+  input,textarea{
+    color: #00bebe;
+  }
+</style>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+  });
+  function verifyPassword() {  
+  var pw = document.getElementById("pswd").value;  
+  var mobile = document.getElementById("mobile").value;  
+  //check empty password field  
+  if(pw == "") {  
+     document.getElementById("message").innerHTML = "**Fill the password please!";  
+     return false;  
+  }  
+   
+ //minimum password length validation  
+  if(pw.length < 8) {  
+     document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
+     return false;  
+  }  
+  
+//maximum length of password validation  
+  if(pw.length > 15) {  
+     document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
+     return false;  
+  } 
+
+  if(mobile.length>10||mobile.length<10){
+     document.getElementById("message").innerHTML = "**Enter Valid Mobile Number!" 
+       return false;
+  }
+     return true;  
+  
+}  
+
+</script>
+<body>
+      <div class="container">
+          <fieldset style="color: #00bebe;" ><legend><h2>Register</h2></legend>
+ 
+    <div class="row">
+      <span id = "message" style="color:red"> </span> <br><br>  
+    <form onsubmit ="return verifyPassword()" action="/utils/registration.php" method="POST" name="form1" class="col s12" >
+     <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input name="firstName" required id="firstName" type="text" class="validate">
+          <label for="firstName">First Name</label>
+        </div>
+       
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input  name="lastName" id="lastName" type="text" class="validate">
+          <label for="lastName">Last Name</label>
+        </div>
+      </div>
+
+    <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">phone</i>
+          <input  name="mobile" required id="mobile" type="number" class="validate">
+          <label for="mobile">Mobile </label>
+        </div>
+        <div data-position="top" data-delay="50" class=" tooltipped input-field col s6" data-tooltip="Enter Valid Email ">
+          <i class="material-icons prefix">email</i>
+          <input required id="gmail" name="gmail" type="text" class="validate">
+          <label for="gmail">Email ID</label>
+        </div>
+      </div>
+
+       <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">key</i>
+          <input  name="pswd" required id="pswd" type="password" class="validate">
+          <label for="pswd">Password </label>
+        </div>
+        <div data-position="top" data-delay="50" class=" tooltipped input-field col s6" data-tooltip="Enter valid category">
+          <i class="material-icons prefix">group_work</i>
+          <select name="category" required>
+          <option  value="" disabled selected>Choose your option</option>
+          <option value="ELECTRICIAN">ELECTRICIAN</option>
+          <option value="PLUMBER">PLUMBER</option>
+          <option value="RESIDENT">RESIDENT</option>
+           <option value="OTHERS">OTHERS</option>
+        </select>
+         <label>Category</label>
+          </div>
+      </div>
+
+   
+        <div class="input-field col s12">
+          <i class="material-icons prefix">home</i>
+          <textarea  id="address" name="address" class="materialize-textarea"></textarea>
+          <label for="address">Address</label>
+        </div>
+
+         <div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Register"  style="text-align: center;">
+           <br>
+      <br><br> <br>
+      <br><br>
+  <button style="border-radius: 8px;" class="btn waves-effect waves-green" type="submit" name="register">Register 
+      <i  class="material-icons right">send</i>
+    </button>
+  </div>
+
+    </form>
+  </div>
+
+  
+  </fieldset>
+   </div>
+ </body>
+
+   {%endblock%}

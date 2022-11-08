@@ -1,0 +1,53 @@
+{%extends 'web/home.html'%}
+ {%block mainblock%}
+ <style type="text/css">
+ 
+  body{
+    background:#212121;
+  }
+  input,textarea{
+    color: #00bebe;
+  }
+</style>
+<script type="text/javascript">
+                function validate()
+              {  var i=document.getElementsByTagName("input");
+              if (i[0].value.length==0||i[1].value.length==0||i[2].value.length==0){
+                  Materialize.toast('Invalid Submission', 600 , 'rounded')
+                return false;
+              }else{
+                return true;
+              }
+            }
+</script>
+<div class="container">
+  <fieldset style="color: #00bebe;" ><legend><h2>Contact Us</h2></legend>
+     <div class="col s12 m5">
+ <form class="col s12 " method="POST" action="utils/request.php" onsubmit=" return validate()" >
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+         <input id="icon_prefix" required="" type="text" name="userName" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Only Alphabets">
+          <label for="icon_prefix">Name</label>
+        </div>
+       
+      <div class="input-field col s12">
+        <i class="material-icons prefix">email</i>
+          <input id="email" required="" type="email" name="userMail" class="tooltipped" data-position="top" data-delay="50" data-tooltip="A Valid E-mail Id">
+          <label for="email" data-error="wrong" data-success="right">Email</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">textsms</i>
+          <textarea id="icon_prefix2" required name="message" class="materialize-textarea"></textarea>
+          <label  for="icon_prefix2">Message</label>
+      </div>
+        <div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Send E-mail"  style="text-align: center;">
+  <button style="border-radius: 8px;" class="btn waves-effect waves-green" type="submit" name="query">Submit 
+      <i  class="material-icons right">send</i>
+    </button>
+  </div>
+</form>
+    </div>
+   
+</fieldset>
+  </div>
+   {%endblock%}

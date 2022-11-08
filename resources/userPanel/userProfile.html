@@ -1,0 +1,172 @@
+{%extends 'userPanel/dash.html'%}
+   
+   
+
+      {%block mainblock%} 
+   
+
+    <div class="col s12 m12 l9">
+<main>
+  <section>
+    <div   class="section">
+      <fieldset>
+        <legend><h5>Dashboard</h5></legend>
+        <br>
+  
+
+    <div class="col s12 m6">
+      <div class="card-panel teal">
+        <span class="white-text"><h4>TOTAL COMPLAINT  {{totalCount}} </h4>
+        </span>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="card-panel teal">
+        <span class="white-text"><h4>ACTIVE COMPLAINT {{activeCount}}  </h4>
+        </span>
+      </div>
+  </div>
+  </fieldset>
+   <div class="divider" style="height: 30px;margin-top: 10px;margin-bottom: 20px;"></div>
+   <fieldset>
+        <legend><h5>YOUR DETAILS</h5></legend>
+        <br>
+
+ <ul class="collection">
+   {% for user in users %}
+    <li class="collection-item avatar">
+      <img src="/images/download.png" alt="" class="circle">
+      <span class="title">{{user.Name}}</span>
+      <p>{{user.Category}}<br>
+        {{user.Email}}<br>
+        +91-{{user.Mobile}}<br>
+        {{user.Address}}<br>
+
+      </p>
+      <br>
+       <a href="#modal2" class="waves-effect waves-light btn modal-trigger">Update Profile </a>
+      <br><br>
+      <a href="#modal1" class="waves-effect waves-light btn modal-trigger">Change Passowrd</a>
+    </li>
+   {% endfor %}
+  </ul>
+   
+      </fieldset>
+    </div>
+  </section>
+<main>
+</div>
+
+  <!-- Modal Trigger -->
+
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+  
+    <form action="/utils/request.php" method="POST">
+    <div class="modal-content">
+    <form class="col s12">
+      <div class="row">
+          <fieldset><legend><strong>Change your Password</strong></legend>
+        <div class="input-field col s6">
+          <i class="material-icons prefix">key</i>
+          <input  type="password" id="txtPassword" name="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+        <div class="input-field col s6">
+          <i class="material-icons prefix">key</i>
+          <input  type="password" id="txtConfirmPassword" class="validate">
+          <label for="txtConfirmPassword">Confirm Password</label>
+        </div>
+        <br>
+        <br>
+        <div class="modal-footer">
+      <button class="btn waves-effect waves-light" onclick="return Validate()" type="submit" name="changePassword">Submit
+    <i class="material-icons right">send</i>
+  </button>
+</div>
+   </fieldset>
+      </div>
+    </form>
+  </div>
+<!-- model 2 for update profile  -->
+  
+    </div>
+
+  </div>
+<div id="modal2" class="modal">
+  
+    <form action="/utils/request.php" method="POST">
+    <div class="modal-content">
+    <form  class="col s12">
+      <div class="row">
+         {% for user in users %}
+          <fieldset><legend><strong>UPDATE DETAILS</strong></legend>
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <input disabled value="{{user.Name}}" id="Name" name="Name" type="text" class="validate">
+          <label for="Name"> Name</label>
+        </div>
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix">email</i>
+          <input disabled value="{{user.Email}}" id="Email" name="Email" type="text" class="validate">
+          <label for="Email">Email ID</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">phone</i>
+          <input  value="{{user.Mobile}}" id="Mobile" name="Mobile" type="number" class="validate">
+          <label for="Mobile">Mobile Number</label>
+        </div>
+
+        <div data-position="top" data-delay="50" class=" tooltipped input-field col s12" data-tooltip="Enter valid category">
+          <i class="material-icons prefix">group_work</i>
+          <select name="category" required>
+          <option  value="{{user.Category}}" selected>{{user.Category}}</option>
+          <option value="PLUMBER">PLUMBER</option>
+          <option value="RESIDENT">RESIDENT</option>
+           <option value="ELECTRICIAN">ELECTRICIAN</option>
+           <option value="OTHERS">OTHERS</option>
+        </select>
+         <label>Category</label>
+          </div>
+           <div class="input-field col s12">
+          <i class="material-icons prefix">home</i>
+          <textarea  id="address" name="address" class="materialize-textarea"> {{user.Address}}</textarea>
+          <label for="address">Address</label>
+        </div>
+      </div>
+        <br>
+        <br>
+        <div class="modal-footer">
+      <button class="btn waves-effect waves-light" onclick="return Mobilevalidation()" type="submit" name="updateProfile">Update
+    <i class="material-icons right">send</i>
+  </button>
+</div>
+   </fieldset>
+    {% endfor %}
+      </div>
+    </form>
+  </div>  
+  <script type="text/javascript">
+     function Validate() {
+        var password = document.getElementById("txtPassword").value;
+        var confirmPassword = document.getElementById("txtConfirmPassword").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+    function Mobilevalidation() {    
+  var mobile = document.getElementById("Mobile").value; 
+  if(mobile.length>10||mobile.length<10){
+   alert("Enter Valid Mobile Number.");
+            return false;
+  }
+     return true;  
+  
+}
+</script>
+          {%endblock%}
